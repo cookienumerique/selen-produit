@@ -28,6 +28,7 @@ selen-produit/
 │   └── validations.md
 └── .claude/
     └── agents/                     # agents opérationnels
+        ├── selen-operating-partner.md    # premier appel — audit 360° et orchestration
         ├── selen-ux-researcher.md
         ├── selen-data-analyst.md
         ├── selen-growth-activation.md

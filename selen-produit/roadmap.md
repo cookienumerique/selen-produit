@@ -34,13 +34,37 @@
 
 ## Roadmap
 
-### 🔥 Phase 1 — Diagnostic (semaines du 26/05 au 23/06 — 4 semaines)
+### 🔒 Phase A — Mise en conformité RGPD (semaine du 26/05 — 1 semaine)
+
+**Objectif :** rendre Selen légalement défendable AVANT toute relance d'acquisition. Bloque la suite de la roadmap.
+
+**Pourquoi maintenant :** Selen traite des données concernant la santé au sens RGPD art. 9 (journal_entry, inner_weather_response, ai_response — 6/6 critères CNIL cochés). Politique de confidentialité existante mais lacunaire sur 5 points critiques. Aucun consentement explicite à l'inscription. Chaque nouveau signup sans correction = risque structurel cumulé.
+
+| # | Action | Owner | Agent | Échéance | Métrique de succès |
+|---|---|---|---|---|---|
+| A.1 | Dev écran consentement (3 cases : politique, données santé art. 9, opt-in IA) + migration `User.consent_at` / `consent_version` / `consent_ai_optin` + endpoint `POST /api/users/consent` + middleware bloquant | Mickaël | `selen-data-analyst` (specs) | 27/05 | Code livré + déployé en staging |
+| A.2 | Réécriture politique de confidentialité : compléter les 5 sections manquantes (identité légale + SIRET, mention art. 9, transfert USA + SCC OpenAI, droit CNIL, hébergeur Ionos nominatif) | Mickaël | `selen-psychologue` (validation éthique) + `selen-operating-partner` (draft si demandé) | 28/05 | Politique v2 publiée sur instantselen.fr |
+| A.3 | OpenAI API : activer l'opt-out training (https://platform.openai.com/docs/data-usage-policies). Vérifier les logs des 30 derniers jours qui peuvent encore exister chez OpenAI | Mickaël | `selen-data-analyst` | 28/05 | Configuration vérifiée, capture d'écran |
+| A.4 | Tester `DeleteMe` en prod : créer un compte test, le supprimer, vérifier en BDD que toutes les tables filles sont vides | Mickaël | `selen-data-analyst` | 29/05 | Compte test bien purgé partout |
+| A.5 | Force re-consentement des 180 users existants au prochain login (modal bloquant) | Mickaël | — | 29/05 | Déployé en prod |
+| A.6 | Documenter le registre des traitements RGPD art. 30 (modèle CNIL) | Mickaël | `selen-operating-partner` | 30/05 | Doc créé dans `docs/registre-traitements-rgpd.md` |
+
+**Livrable Phase A :** une note `docs/conformite-rgpd-2026-05-30.md` listant les preuves de conformité (politique publiée, screenshot consent screen, test DeleteMe, opt-out OpenAI, registre traitements).
+
+**Garde-fou :** **aucune action d'acquisition ni de communication publique avant validation Phase A**. La relance d'acquisition (Phase 1.0c) démarre vendredi 30/05 au plus tôt.
+
+---
+
+### 🔥 Phase 1 — Diagnostic (semaines du 02/06 au 30/06 — 4 semaines, décalée d'1 semaine)
 
 **Objectif :** comprendre AVANT de décider. Pas de code produit. Pas de nouvelle feature. Pas de monétisation.
 
 | # | Action | Owner | Agent à consulter | Échéance | Métrique de succès |
 |---|---|---|---|---|---|
-| 1.1 | Confirmer envoi segment 2 Mom Test (31 emails meteo_uniquement_j0) | Mickaël | — | 26/05 | Drafts envoyés, statut confirmé |
+| 1.0 | Audit 360° initial de Selen (verdict 5 axes + top 3 leviers + plan 7 jours) — **livré** | `selen-operating-partner` | — | 24/05 | ✅ `docs/audit-2026-05-24.md` + `docs/audit-prod-2026-05-24.md` |
+| 1.0a | **Forensic mars→avril** : retrouver le(s) changement(s) qui a fait passer le taux « jamais ouvert » de 56 % à 22 %. Examiner commits front+back 15/03→15/04, store, marketing. Formuler 1-3 hypothèses. | Mickaël | `selen-data-analyst` + `selen-operating-partner` | 27/05 | Hypothèses écrites dans `docs/hypotheses.md` (H4) |
+| 1.0b | **Audit acquisition** : screenshots App Store + Play Store consoles (impressions / installs / conversion / rating sur 90 jours). Diagnostiquer la chute 76→7. | Mickaël | `selen-growth-activation` | 26/05 | Screenshots + analyse écrite |
+| 1.1 | Confirmer envoi segment 2 Mom Test (31 emails meteo_uniquement_j0 — désormais 42 users à reconsidérer) | Mickaël | `selen-ux-researcher` | 26/05 | Drafts envoyés, statut confirmé |
 | 1.2 | Auditer la traçabilité notifs/emails côté API (les 53 « jamais ouvert » ont-elles reçu quelque chose ?) | Mickaël + `selen-data-analyst` | `selen-data-analyst` | 28/05 | Verdict écrit : trace oui/non, gap d'instrumentation chiffré |
 | 1.3 | Récupérer les premières réponses Mom Test, anonymiser, coder en thèmes | Mickaël + `selen-ux-researcher` | `selen-ux-researcher` | 03/06 | 12+ verbatims codés, 3-5 thèmes stabilisés |
 | 1.4 | Relancer les non-répondeurs (segment 1 + segment 2 si applicable) | Mickaël | `selen-ux-researcher` | 30/05 | Relance envoyée, +5 à +10 réponses attendues |
