@@ -8,6 +8,40 @@
 
 ## Décisions prises
 
+### 2026-05-25 — Ship 1.25.0 sans écran d'accueil + report écran d'accueil new signups en 1.25.1
+**Contexte :** lors de la review wording d'aujourd'hui, `selen-psychologue` (Brun) a signalé un risque clinique sur la modale de consent qui s'affiche brutalement au premier lancement, sans accueil préalable — inverse de l'alliance thérapeutique (Bordin 1979). Sa proposition (Option C) : insérer 1 écran d'accueil "Bienvenue. Selen est un espace pour toi…" + bouton "Continuer" AVANT la modale, **uniquement pour les new signups** (les 180 existantes en re-consent gardent la modale directe). Coût : ~1 jour de dev mobile. Pattern : Headspace, Petit Bambou.
+
+**Arbitrage `selen-operating-partner` (Tessier) :** le goulot critique cette semaine est le ship 1.25.0 lui-même, pas le first-install. Sans le ship :
+1. Conformité RGPD fragile côté mobile (consentement par défaut sans information préalable = exactement ce que la CNIL retoque sur art. 9 santé)
+2. 180 users existantes restent sans réponse de la lune (`consent_ai_optin = true` patché en SQL mais l'UI mobile ne matérialise pas le consentement)
+3. Phase A roadmap en zone rouge si le ship glisse (échéance fermeture 30/05)
+
+Volume d'acquisition réel : ~1-2 new signups par semaine (7 en mai). Le calcul : retarder le ship d'1 jour pour protéger 1-2 personnes vs laisser 180 sans AI + Phase A qui glisse → ne passe pas.
+
+**Décision : Option D (3ᵉ voie Tessier)**
+- Ship 1.25.0 cette semaine **sans** écran d'accueil, avec juste la réécriture du wording de la modale (titre adouci "Un instant avant d'entrer", paragraphes humanisés, mention "OpenAI/États-Unis" sortie vers la politique de confidentialité v2 à venir)
+- **Écran d'accueil dev en 1.25.1, ship cible jeudi 05/06** (cf. roadmap A.7)
+- Les libellés de boutons "J'accepte tout" / "Continuer sans" sont conservés (Option 2 Mickaël) — pas de DPO/cabinet sous la main pour valider une réécriture en "Activer la réponse de la lune"
+
+**Conditions de la décision (à respecter) :**
+1. La politique de confidentialité v2 (A.2 roadmap, échéance 28/05) doit être publiée AVANT le ship 1.25.0 et doit mentionner explicitement OpenAI + États-Unis + SCC (sinon le retrait de ces mentions de la modale fragilise le consentement éclairé art. 13)
+2. La ligne A.7 est lockée dans la roadmap — pas de "on verra"
+
+**Rationale clinique non négligé :** l'alliance thérapeutique se joue aussi sur les 7-30 jours suivants, pas uniquement sur l'écran 1. L'argument de Brun reste valide mais arbitré dans le temps, pas annulé.
+
+**Source :** échanges avec `selen-psychologue` (review wording) et `selen-operating-partner` (arbitrage Option D) le 2026-05-25.
+
+### 2026-05-25 — Opt-in IA OpenAI reste optionnelle (gate dur rejeté)
+**Contexte :** dev en cours de l'écran de consentement RGPD (Phase A). 3 cases : politique (requise), données santé art. 9 (requise), opt-in IA OpenAI (optionnelle). Mickaël a proposé de passer l'opt-in IA en gate dur : sans accord OpenAI, pas d'accès à Selen.
+**Décision :** **refus du gate dur.** L'opt-in IA reste une vraie opt-in optionnelle — l'app fonctionne sans, la "réponse de la lune" n'est simplement pas générée ni persistée pour les users sans consentement.
+**Rationale (verdict `selen-psychologue` / Dr. Brun) :**
+- **Légal :** art. 7§4 RGPD + EDPB Guidelines 05/2020 sur le consentement — un consentement n'est libre que si le refus n'entraîne pas de détriment et n'est pas conditionné à la fourniture du service hors strict nécessaire. Selen est une app de capsules + journal ; la "réponse de la lune" est un enrichissement narratif, pas le service. Conditionner l'accès à un transfert USA de données art. 9 = consentement vicié donc nul, position constante CNIL.
+- **Clinique :** sur app santé mentale, conditionner l'accès à "accepte que ton intimité parte chez OpenAI" est l'inverse de ce que demande l'éthique numérique en santé mentale (HAS Bonnes pratiques apps santé 2021).
+- **Produit :** 63 % des users post-10/03 n'activent déjà jamais. Ajouter un gate IA aggrave un funnel déjà cassé sans rapport coût/bénéfice défendable.
+**Patterns de référence cités :** Petit Bambou (analytics opt-in), Wysa (cloud opt-in séparé du soin), pattern "just-in-time consent" ICO UK + HAS 2021.
+**Effet sur la roadmap :** ajout d'un ticket Phase B "opt-in IA contextuel post-capsule 1" + instrumentation à mettre en place dès la 1.25.0 (taux opt-in IA au onboarding, complétion capsule 1 segmenté opt-in/opt-out, rétention J7 par segment). Revue à 15j.
+**Code :** branche `1.20.0` (API) + `1.25.0` (front) — l'opt-in actuelle est conforme à cette décision, aucune modif à faire.
+
 ### 2026-05-25 — RGPD priorité avant relance acquisition
 **Constat :** politique de confidentialité existante (https://instantselen.fr/politique-de-confidentialite) mais avec 5 gaps critiques (identité légale incomplète, base légale par finalité absente, art. 9 RGPD non mentionné alors que journal_entry + inner_weather_response sont des données santé, transfert USA via OpenAI non régulé, droit CNIL non mentionné). Aucun écran de consentement à l'inscription.
 **Décision :** **bloquer la relance d'acquisition jusqu'à ce que** : (1) la politique soit mise à jour sur les 5 gaps, (2) un écran de consentement explicite soit intégré au flow signup, (3) les 180 users existants soient invités à re-consentir au prochain login.

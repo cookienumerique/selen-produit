@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mentions légales – SELEN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --slate: #1a1f2e;
+      --slate-mid: #242938;
+      --linen: #f0ebe1;
+      --linen-soft: #e8e0d0;
+      --moon: #c9bfa8;
+      --moon-light: #ddd4c0;
+      --accent: #7b6fa0;
+      --accent-soft: rgba(123, 111, 160, 0.15);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background-color: var(--slate);
+      color: var(--linen);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.8;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 15% 20%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 35% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 55% 15%, rgba(255,255,255,0.35) 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 80%, rgba(255,255,255,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 85% 40%, rgba(255,255,255,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 10% 75%, rgba(255,255,255,0.2) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 90% 10%, rgba(255,255,255,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 45% 90%, rgba(255,255,255,0.2) 0%, transparent 100%),
+        radial-gradient(1px 1px at 25% 45%, rgba(255,255,255,0.15) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 55%, rgba(255,255,255,0.25) 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 32px 120px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .moon-icon {
+      font-size: 48px;
+      display: block;
+      margin-bottom: 24px;
+      opacity: 0.9;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--moon);
+      margin-bottom: 16px;
+    }
+
+    header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--linen);
+      line-height: 1.2;
+    }
+
+    .last-update {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--moon);
+      opacity: 0.7;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 2px;
+      margin-bottom: 56px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      padding: 4px;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 14px 20px;
+      background: transparent;
+      border: none;
+      border-radius: 9px;
+      color: var(--moon);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .tab-btn.active {
+      background: var(--accent-soft);
+      color: var(--linen);
+      border: 1px solid rgba(123, 111, 160, 0.3);
+    }
+
+    .tab-btn:hover:not(.active) {
+      color: var(--linen-soft);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .section {
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(201, 191, 168, 0.1);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .section-number {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 3vw, 26px);
+      font-weight: 400;
+      color: var(--linen);
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .section h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--moon-light);
+      margin: 28px 0 12px;
+    }
+
+    .section p {
+      font-size: 15px;
+      color: rgba(240, 235, 225, 0.75);
+      margin-bottom: 14px;
+      line-height: 1.85;
+    }
+
+    .section ul {
+      list-style: none;
+      margin: 14px 0;
+      padding: 0;
+    }
+
+    .section ul li {
+      font-size: 15px;
+      color: rgba(240, 235, 225, 0.75);
+      padding: 6px 0 6px 20px;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .section ul li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    .highlight {
+      background: var(--accent-soft);
+      border: 1px solid rgba(123, 111, 160, 0.25);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 20px 0;
+    }
+
+    .highlight p {
+      margin-bottom: 0;
+      font-size: 14px;
+      color: var(--moon-light);
+    }
+
+    .important {
+      background: rgba(201, 191, 168, 0.06);
+      border-left: 2px solid var(--moon);
+      border-radius: 0 8px 8px 0;
+      padding: 16px 20px;
+      margin: 16px 0;
+    }
+
+    .important p {
+      margin-bottom: 0;
+      font-size: 14px;
+    }
+
+    .crisis-banner {
+      background: rgba(190, 110, 105, 0.08);
+      border: 1px solid rgba(190, 110, 105, 0.35);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+
+    .crisis-banner h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--linen);
+      margin-bottom: 14px;
+    }
+
+    .crisis-banner p {
+      font-size: 14px;
+      color: rgba(240, 235, 225, 0.85);
+      margin-bottom: 10px;
+      line-height: 1.75;
+    }
+
+    .crisis-banner ul {
+      list-style: none;
+      margin: 12px 0 0;
+      padding: 0;
+    }
+
+    .crisis-banner ul li {
+      font-size: 14px;
+      color: rgba(240, 235, 225, 0.85);
+      padding: 4px 0 4px 18px;
+      position: relative;
+      line-height: 1.7;
+    }
+
+    .crisis-banner ul li::before {
+      content: '·';
+      position: absolute;
+      left: 0;
+      color: rgba(190, 110, 105, 0.8);
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    .crisis-banner a.crisis-link {
+      color: var(--linen);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(240, 235, 225, 0.4);
+      font-weight: 500;
+      transition: border-color 0.2s;
+    }
+
+    .crisis-banner a.crisis-link:hover {
+      border-color: var(--linen);
+    }
+
+    .contact-link {
+      color: var(--moon-light);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(201, 191, 168, 0.3);
+      transition: border-color 0.2s;
+    }
+
+    .contact-link:hover {
+      border-color: var(--moon-light);
+    }
+
+    footer {
+      margin-top: 80px;
+      text-align: center;
+      padding-top: 40px;
+      border-top: 1px solid rgba(201, 191, 168, 0.1);
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--moon);
+      opacity: 0.5;
+    }
+
+    .sub-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 14px;
+    }
+
+    .sub-table th {
+      text-align: left;
+      padding: 10px 16px;
+      background: rgba(123, 111, 160, 0.1);
+      color: var(--moon-light);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .sub-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(201, 191, 168, 0.08);
+      color: rgba(240, 235, 225, 0.7);
+      vertical-align: top;
+    }
+
+    .sub-table tr:last-child td { border-bottom: none; }
+
+    @media (max-width: 600px) {
+      .wrapper { padding: 48px 20px 80px; }
+      .sub-table { font-size: 13px; }
+      .sub-table th, .sub-table td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+
+    <header>
+      <span class="moon-icon">🌙</span>
+      <p class="brand">Selen</p>
+      <h1>Mentions légales</h1>
+      <p class="last-update">Dernière mise à jour : 26 mai 2026 (version 2)</p>
+    </header>
+
+    <div class="crisis-banner" role="note" aria-label="Aide en cas de crise">
+      <h3>Si tu traverses un moment difficile</h3>
+      <p>Selen est une application de bien-être. Elle ne remplace pas un soin et n'est pas conçue pour répondre à une situation de crise. Si tu en vis une — ou si tu accompagnes quelqu'un qui en vit une — voici des lignes humaines, gratuites et confidentielles, joignables maintenant.</p>
+      <ul>
+        <li><strong style="color: var(--linen);">Si tu as des pensées suicidaires, ou si un proche en a</strong> — <a href="tel:3114" class="crisis-link">3114</a>, numéro national de prévention du suicide, gratuit, 24h/24, 7j/7.</li>
+        <li><strong style="color: var(--linen);">Si la situation est immédiatement dangereuse</strong> — <a href="tel:15" class="crisis-link">15</a> (SAMU), pour toi ou pour la personne avec toi.</li>
+        <li><strong style="color: var(--linen);">Si tu sens quelque chose monter et que tu veux parler à quelqu'un</strong> — <a href="tel:0972394050" class="crisis-link">SOS Amitié au 09 72 39 40 50</a>, écoute anonyme 24h/24.</li>
+        <li><strong style="color: var(--linen);">Si tu veux échanger avec une écoutante formée sur les pensées suicidaires</strong> — <a href="tel:0145394000" class="crisis-link">Suicide Écoute au 01 45 39 40 00</a>, 24h/24.</li>
+      </ul>
+      <p style="margin-top: 14px; font-size: 13px; color: rgba(240, 235, 225, 0.6);">Appeler ces numéros n'engage à rien. Tu peux raccrocher quand tu veux.</p>
+    </div>
+
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab('privacy', event)">Politique de confidentialité</button>
+      <button class="tab-btn" onclick="showTab('cgu', event)">CGU & Abonnements</button>
+    </div>
+
+    <!-- POLITIQUE DE CONFIDENTIALITÉ -->
+    <div id="privacy" class="panel active">
+
+      <div class="section">
+        <span class="section-number">01</span>
+        <h2>Préambule</h2>
+        <p>Selen est une application mobile d'introspection et de bien-être émotionnel, conçue pour vous accompagner au quotidien à travers des capsules thérapeutiques, un suivi de l'état émotionnel (« météo intérieure ») et un journal intime augmenté par une intelligence artificielle générative.</p>
+        <p>Selen accorde une attention particulière à la protection de vos données émotionnelles, qui sont qualifiées de <strong style="color: var(--linen);">données concernant la santé</strong> au sens de l'article 9 du Règlement Général sur la Protection des Données (RGPD). Cette politique décrit comment Selen recueille, utilise, conserve et protège ces données.</p>
+      </div>
+
+      <div class="section">
+        <span class="section-number">02</span>
+        <h2>Responsable de traitement</h2>
+        <ul>
+          <li><strong style="color: var(--linen-soft);">Identité</strong> — FLAHAUT MARIE, exerçant sous le nom commercial <strong style="color: var(--linen);">CONCEPTION DIGITALE</strong> (application Selen)</li>
+          <li><strong style="color: var(--linen-soft);">Forme juridique</strong> — Micro-entreprise (entreprise individuelle)</li>
+          <li><strong style="color: var(--linen-soft);">SIRET</strong> — 82936679800033</li>
+          <li><strong style="color: var(--linen-soft);">Adresse</strong> — 1 rue du Manège, 17540 Saint-Sauveur-d'Aunis, France</li>
+          <li><strong style="color: var(--linen-soft);">Contact</strong> — <a href="mailto:contact@instantselen.fr" class="contact-link">contact@instantselen.fr</a></li>
+        </ul>
+        <p>Selen n'est pas tenue de désigner un Délégué à la Protection des Données (DPO) au regard de sa taille et de son volume d'activité actuel. Pour toute question relative à vos données ou pour exercer vos droits, écrivez à <a href="mailto:contact@instantselen.fr" class="contact-link">contact@instantselen.fr</a>.</p>
+      </div>
+
+      <div class="section">
+        <span class="section-number">03</span>
+        <h2>Données collectées</h2>
+        <table class="sub-table">
+          <thead>
+            <tr>
+              <th>Catégorie</th>
+              <th>Données</th>
+              <th>Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong style="color: var(--linen-soft);">Identification</strong></td>
+              <td>Adresse email, identifiant unique Google ou Apple, nom et prénom (si fournis par Google/Apple)</td>
+              <td>Google Sign-In ou Sign-In with Apple</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--linen-soft);">Profil</strong></td>
+              <td>Photo de profil (si fournie par Google)</td>
+              <td>Google</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--linen-soft);">Données concernant la santé<br/>(art. 9 RGPD)</strong></td>
+              <td>Météo intérieure quotidienne, réponses textuelles aux capsules d'introspection, entrées de journal intime, horodatages</td>
+              <td>Saisies par vous dans l'application</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--linen-soft);">Données générées par IA</strong></td>
+              <td>« Réponse de la lune » produite à partir de vos saisies</td>
+              <td>OpenAI à partir de vos contenus</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--linen-soft);">Données techniques</strong></td>
+              <td>Adresse IP, horodatage des requêtes, informations device (OS, version app)</td>
+              <td>Automatiques</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--linen-soft);">Données d'abonnement</strong></td>
+              <td>Statut d'abonnement, plateforme (Apple/Google), date d'expiration, identifiant de transaction</td>
+              <td>App Store / Google Play</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <span class="section-number">04</span>
+        <h2>Finalités et bases légales</h2>
+        <table class="sub-table">
+          <thead>
+            <tr>
+              <th>Finalité</th>
+              <th>Données</th>
+              <th>Base légale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Création et gestion du compte</td>
+              <td>Identification, profil</td>
+              <td>Art. 6.1.b — Exécution du contrat</td>
+            </tr>
+            <tr>
+              <td>Fonctionnement de l'app hors données santé</td>
+              <td>Identification, données techniques</td>
+              <td>Art. 6.1.b — Exécution du contrat</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--linen-soft);">Traitement des données concernant la santé</strong> (météo, capsules, journal)</td>
+              <td>Données art. 9</td>
+              <td><strong style="color: var(--linen-soft);">Art. 9.2.a — Consentement explicite</strong></td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--linen-soft);">Génération de la « réponse de la lune » via OpenAI</strong></td>
+              <td>Réponses capsules, journal</td>
+              <td><strong style="color: var(--linen-soft);">Art. 9.2.a — Consentement explicite</strong> (opt-in dédié)</td>
+            </tr>
+            <tr>
+              <td>Sécurité, prévention d'abus, débogage</td>
+              <td>Logs techniques, IP</td>
+              <td>Art. 6.1.f — Intérêt légitime</td>
+            </tr>
+            <tr>
+              <td>Gestion des abonnements payants</td>
+              <td>Données Apple/Google IAP</td>
+              <td>Art. 6.1.b — Exécution du contrat</td>
+            </tr>
+            <tr>
+              <td>Obligations comptables et fiscales</td>
+              <td>Données d'abonnement</td>
+              <td>Art. 6.1.c — Obligation légale</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="important">
+          <p><strong style="color: var(--linen);">Aucune donnée n'est vendue, louée ou partagée à des fins publicitaires.</strong></p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-number">05</span>
+        <h2>Données concernant la santé (article 9 RGPD)</h2>
+        <p>Selen traite des données concernant votre santé mentale, à savoir :</p>
+        <ul>
+          <li>Vos états émotionnels datés (« météo intérieure »)</li>
+          <li>Le contenu textuel de votre journal intime</li>
+          <li>Vos réponses aux capsules d'introspection</li>
+          <li>Les réponses générées par l'intelligence artificielle à partir de ces contenus</li>
+        </ul>
+        <div class="highlight">
+          <p>Le traitement de ces données est strictement conditionné à votre consentement explicite, recueilli avant tout usage de l'application via un écran de consentement dédié, conformément à l'article 9.2.a du RGPD.</p>
+        </div>
+        <p>Vous pouvez retirer votre consentement à tout moment depuis le menu <strong style="color: var(--linen-soft);">Paramètres → Confidentialité</strong> de l'application. Le retrait du consentement à la fonctionnalité IA désactive la « réponse de la lune » sans affecter le reste de l'application. Le retrait global du consentement entraîne la suppression définitive de votre compte et de l'ensemble des données associées dans un délai maximum de 30 jours, à l'exception des données nécessaires au respect d'obligations légales (comptabilité notamment).</p>
+      </div>
+
+      <div class="section">
+        <span class="section-number">06</span>
+        <h2>Destinataires et sous-traitants</h2>
+        <p>Vos données peuvent être communiquées aux entités suivantes, dans la mesure strictement nécessaire à la finalité poursuivie :</p>
+        <table class="sub-table">
+          <thead>
+            <tr>
+              <th>Sous-traitant</th>
+              <th>Rôle</th>
+              <th>Localisation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong style="color: var(--linen-soft);">IONOS SE</strong></td>
+              <td>Hébergement de la base de données et des fichiers serveur</td>
+              <td>Allemagne (Union européenne)</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--linen-soft);">OpenAI, Inc.</strong></td>
+              <td>Génération des « réponses de la lune » via API</td>
+              <td>États-Unis</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--linen-soft);">Google LLC</strong></td>
+              <td>Authentification Google Sign-In, Firebase</td>
+              <td>États-Unis</td>
+            </tr>
+            <tr>
+              <td><strong style="color: var(--linen-soft);">Apple Inc.</strong></td>
+              <td>Sign-In with Apple, gestion des abonnements iOS</td>
+              <td>États-Unis</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="important">
+          <p>Aucune donnée n'est cédée, vendue ou louée à des tiers à des fins commerciales.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-number">07</span>
+        <h2>Transferts de données hors Union européenne</h2>
+        <p>Certains traitements impliquent le transfert de vos données vers les États-Unis (OpenAI, Google, Apple). Ces transferts sont encadrés par les mécanismes prévus par le RGPD :</p>
+        <ul>
+          <li><strong style="color: var(--linen-soft);">Clauses Contractuelles Types (CCT / SCC)</strong> approuvées par la Commission européenne (décision 2021/914), formalisées par le <em>Data Processing Addendum</em> signé entre Selen et OpenAI — consultable sur <a href="https://openai.com/policies/eu-data-processing-addendum/" class="contact-link" target="_blank" rel="noopener">openai.com/policies/eu-data-processing-addendum</a></li>
+          <li><strong style="color: var(--linen-soft);">Data Privacy Framework UE-USA</strong> pour Google LLC et Apple Inc., entreprises certifiées</li>
+          <li><strong style="color: var(--linen-soft);">Politique API OpenAI</strong> — OpenAI s'engage contractuellement à ne pas utiliser les données envoyées via son API pour entraîner ses modèles, conformément à sa politique applicable depuis mars 2023</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <span class="section-number">08</span>
+        <h2>Durée de conservation</h2>
+        <table class="sub-table">
+          <thead>
+            <tr>
+              <th>Type de données</th>
+              <th>Durée</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Compte utilisateur (identification, profil)</td>
+              <td>Tant que le compte est actif. Suppression dans les 30 jours suivant une demande.</td>
+            </tr>
+            <tr>
+              <td>Données émotionnelles (météo, capsules, journal, réponses IA)</td>
+              <td>Tant que le compte est actif. Suppression dans les 30 jours suivant une demande de retrait du consentement.</td>
+            </tr>
+            <tr>
+              <td>Logs techniques</td>
+              <td>12 mois</td>
+            </tr>
+            <tr>
+              <td>Données d'abonnement</td>
+              <td>10 ans (obligation comptable et fiscale)</td>
+            </tr>
+            <tr>
+              <td>Sauvegardes (backups Ionos)</td>
+              <td>30 jours en rotation glissante, puis purgées automatiquement</td>
+            </tr>
+            <tr>
+              <td>Données envoyées à OpenAI (abuse monitoring)</td>
+              <td>Maximum 30 jours côté OpenAI, conformément à leur politique API</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section">
+        <span class="section-number">09</span>
+        <h2>Sécurité</h2>
+        <p>Selen met en œuvre les mesures techniques et organisationnelles suivantes pour protéger vos données :</p>
+        <ul>
+          <li>Communications chiffrées HTTPS / TLS 1.2 ou supérieur sur l'ensemble des échanges client-serveur</li>
+          <li>Stockage chiffré au repos via les mécanismes de l'hébergeur</li>
+          <li>Authentification par token JWT signé</li>
+          <li>Accès aux données restreint au responsable de traitement</li>
+          <li>Sauvegardes régulières</li>
+          <li>Suppression en cascade des données associées à un compte supprimé, vérifiée par contraintes de base de données</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <span class="section-number">10</span>
+        <h2>Vos droits</h2>
+        <p>Conformément aux articles 12 à 23 du RGPD, vous disposez des droits suivants :</p>
+        <ul>
+          <li><strong style="color: var(--linen-soft);">Droit d'accès</strong> (art. 15) — obtenir confirmation que vos données sont traitées et en recevoir une copie</li>
+          <li><strong style="color: var(--linen-soft);">Droit de rectification</strong> (art. 16) — corriger des données inexactes ou incomplètes</li>
+          <li><strong style="color: var(--linen-soft);">Droit à l'effacement</strong> (art. 17) — demander la suppression de votre compte et de l'ensemble de vos données</li>
+          <li><strong style="color: var(--linen-soft);">Droit à la limitation du traitement</strong> (art. 18) — limiter l'usage de vos données dans certains cas</li>
+          <li><strong style="color: var(--linen-soft);">Droit à la portabilité</strong> (art. 20) — recevoir vos données dans un format structuré et lisible par machine</li>
+          <li><strong style="color: var(--linen-soft);">Droit d'opposition</strong> (art. 21) — vous opposer à certains traitements (notamment ceux fondés sur l'intérêt légitime)</li>
+          <li><strong style="color: var(--linen-soft);">Droit de retirer votre consentement</strong> (art. 7.3) — à tout moment, sans porter atteinte à la licéité du traitement effectué avant ce retrait</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <span class="section-number">11</span>
+        <h2>Comment exercer vos droits</h2>
+        <p>Pour exercer un ou plusieurs de ces droits, écrivez à : <a href="mailto:contact@instantselen.fr" class="contact-link">contact@instantselen.fr</a></p>
+        <p>Vous recevrez une réponse dans un délai maximum de <strong style="color: var(--linen-soft);">30 jours</strong> à compter de la réception de votre demande (délai pouvant être prolongé à 90 jours pour des demandes complexes, sur notification motivée).</p>
+        <p>Afin de vérifier votre identité et de prévenir toute usurpation, Selen peut être amenée à vous demander une preuve d'identité raisonnable (capture d'écran de votre compte connecté, ou copie d'une pièce d'identité dont les éléments non strictement nécessaires peuvent être masqués).</p>
+      </div>
+
+      <div class="section">
+        <span class="section-number">12</span>
+        <h2>Droit de réclamation auprès de la CNIL</h2>
+        <p>Si vous estimez que vos droits ne sont pas respectés ou que le traitement de vos données ne respecte pas le RGPD, vous avez le droit d'introduire une réclamation auprès de la <strong style="color: var(--linen-soft);">Commission Nationale de l'Informatique et des Libertés (CNIL)</strong> :</p>
+        <ul>
+          <li>3 Place de Fontenoy, TSA 80715, 75334 Paris CEDEX 07</li>
+          <li>Téléphone : +33 1 53 73 22 22</li>
+          <li>Plainte en ligne : <a href="https://www.cnil.fr/fr/plaintes" class="contact-link" target="_blank" rel="noopener">cnil.fr/fr/plaintes</a></li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <span class="section-number">13</span>
+        <h2>Cookies et traceurs</h2>
+        <p>Selen est une application mobile et ne dépose pas de cookies au sens du droit communautaire. Les données techniques nécessaires au fonctionnement de l'application (token d'authentification, préférences locales) sont stockées localement sur votre appareil via les mécanismes natifs iOS / Android.</p>
+        <p>Aucun traceur publicitaire ni outil d'analyse comportementale tiers (type Google Analytics, Facebook Pixel) n'est utilisé dans l'application à ce jour.</p>
+      </div>
+
+      <div class="section">
+        <span class="section-number">14</span>
+        <h2>Modifications de la politique</h2>
+        <p>Selen peut modifier cette politique pour refléter les évolutions de l'application, des sous-traitants ou de la réglementation. Les modifications substantielles vous seront notifiées par email à l'adresse associée à votre compte, ainsi que par une notification dans l'application, et un nouveau consentement vous sera demandé lorsque la modification l'exige — notamment toute évolution touchant aux données de santé ou aux transferts hors UE.</p>
+      </div>
+
+      <div class="section">
+        <span class="section-number">15</span>
+        <h2>Nature de l'application</h2>
+        <div class="important">
+          <p>Selen est une application de bien-être et d'introspection personnelle. Elle ne constitue pas un dispositif médical et ne fournit aucun diagnostic ni soin psychologique ou thérapeutique. Si tu traverses une période difficile, les numéros d'écoute et d'urgence présentés en tête de cette page sont à ta disposition à tout moment.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CGU -->
+    <div id="cgu" class="panel">
+
+      <div class="section">
+        <span class="section-number">01</span>
+        <h2>Objet</h2>
+        <p>Les présentes Conditions Générales d'Utilisation (CGU) régissent l'accès et l'utilisation de l'application mobile <strong style="color: var(--linen);">SELEN</strong>, application de bien-être et d'introspection personnelle éditée par FLAHAUT MARIE (CONCEPTION DIGITALE), micro-entreprise, SIRET 82936679800033.</p>
+        <p>En téléchargeant et utilisant SELEN, l'utilisateur accepte sans réserve les présentes CGU.</p>
+      </div>
+
+      <div class="section">
+        <span class="section-number">02</span>
+        <h2>Accès à l'application</h2>
+        <p>SELEN est disponible sur iOS (App Store) et Android (Google Play Store). L'application est accessible aux personnes âgées de 17 ans et plus.</p>
+        <p>Une version gratuite est disponible. L'accès à certaines fonctionnalités est conditionné à la souscription d'un abonnement premium.</p>
+      </div>
+
+      <div class="section">
+        <span class="section-number">03</span>
+        <h2>Abonnements auto-renouvelables</h2>
+
+        <h3>3.1 Offres disponibles</h3>
+        <table class="sub-table">
+          <thead>
+            <tr>
+              <th>Offre</th>
+              <th>Durée</th>
+              <th>Prix</th>
+              <th>Renouvellement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Selen Founder Mensuel</td>
+              <td>1 mois</td>
+              <td>6,99 € / mois</td>
+              <td>Automatique chaque mois</td>
+            </tr>
+            <tr>
+              <td>Selen Founder Annuel</td>
+              <td>12 mois</td>
+              <td>59,99 € / an</td>
+              <td>Automatique chaque année</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Les prix sont indiqués en euros TTC et peuvent varier selon le pays de résidence de l'utilisateur.</p>
+
+        <h3>3.2 Facturation</h3>
+        <p>Le paiement est débité sur le compte Apple ID ou Google Play de l'utilisateur à la confirmation de l'achat.</p>
+        <p>L'abonnement se renouvelle automatiquement sauf résiliation au moins <strong style="color: var(--linen-soft);">24 heures avant la fin de la période en cours</strong>.</p>
+        <p>Le montant du renouvellement est débité dans les 24 heures précédant la fin de la période en cours.</p>
+
+        <h3>3.3 Gestion et résiliation</h3>
+        <p>L'utilisateur peut gérer ou annuler son abonnement à tout moment depuis :</p>
+        <ul>
+          <li><strong style="color: var(--linen-soft);">iOS</strong> — Réglages → Identifiant Apple → Abonnements</li>
+          <li><strong style="color: var(--linen-soft);">Android</strong> — Google Play Store → Abonnements</li>
+        </ul>
+        <div class="important">
+          <p>La résiliation prend effet à la fin de la période en cours. Aucun remboursement ne sera effectué pour la période déjà payée.</p>
+        </div>
+
+        <h3>3.4 Période d'essai</h3>
+        <p>Si une période d'essai gratuite est proposée, elle est accordée une seule fois par utilisateur. Tout abonnement souscrit pendant la période d'essai qui n'est pas résilié avant son terme sera automatiquement converti en abonnement payant.</p>
+      </div>
+
+      <div class="section">
+        <span class="section-number">04</span>
+        <h2>Contenu et fonctionnalités</h2>
+        <p>SELEN propose les fonctionnalités suivantes :</p>
+        <ul>
+          <li><strong style="color: var(--linen-soft);">Capsule du jour</strong> — une question d'introspection quotidienne par thème</li>
+          <li><strong style="color: var(--linen-soft);">Réponse de la lune</strong> — une réponse personnalisée générée par IA à partir de la réponse de l'utilisateur</li>
+          <li><strong style="color: var(--linen-soft);">Météo intérieure</strong> — suivi quotidien de l'humeur</li>
+          <li><strong style="color: var(--linen-soft);">Power Shake</strong> — exercice de respiration déclenché par le mouvement du téléphone</li>
+        </ul>
+        <p>SELEN se réserve le droit de modifier, suspendre ou supprimer des fonctionnalités à tout moment, sans préavis.</p>
+      </div>
+
+      <div class="section">
+        <span class="section-number">05</span>
+        <h2>Utilisation de l'IA</h2>
+        <p>La fonctionnalité « Réponse de la lune » utilise un service d'intelligence artificielle tiers (OpenAI) pour générer des réponses personnalisées.</p>
+        <div class="highlight">
+          <p>Ces réponses sont générées automatiquement et ne constituent en aucun cas un avis médical, psychologique ou thérapeutique. En cas de détresse émotionnelle, l'utilisateur est invité à consulter un professionnel de santé.</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-number">06</span>
+        <h2>Responsabilités</h2>
+        <p>SELEN est une application de bien-être. Elle n'est pas un dispositif médical et ne se substitue pas à un suivi par un professionnel de santé.</p>
+
+        <h3>6.1 Engagements de SELEN</h3>
+        <p>SELEN s'engage à mettre tout en œuvre pour assurer la disponibilité et la continuité du service, sans pouvoir garantir une disponibilité ininterrompue.</p>
+        <p>Concernant les contenus diffusés dans l'application (capsules d'introspection, « Réponse de la lune » générée par IA), SELEN assume une responsabilité éditoriale : les contenus sont conçus avec un cadrage clinique (psychologue clinicienne), les sorties de l'IA sont soumises à des garde-fous de modération sur les sujets sensibles (idées suicidaires, automutilation, violences, troubles graves), et un dispositif de signalement permet à l'utilisateur de remonter à tout moment une réponse jugée inappropriée ou potentiellement préjudiciable, à l'adresse <a href="mailto:contact@instantselen.fr" class="contact-link">contact@instantselen.fr</a>. Les signalements sont examinés dans les meilleurs délais.</p>
+
+        <h3>6.2 Limites de responsabilité</h3>
+        <p>SELEN ne saurait être tenu responsable :</p>
+        <ul>
+          <li>Des interruptions temporaires de service pour maintenance ou incident technique</li>
+          <li>Des décisions personnelles, médicales ou thérapeutiques que l'utilisateur prendrait sur la base des contenus diffusés dans l'application : ces contenus n'ont pas valeur de consultation et ne se substituent pas à l'avis d'un professionnel de santé</li>
+          <li>Des dommages indirects liés à l'utilisation de l'application</li>
+        </ul>
+        <p>En cas de détresse émotionnelle, de pensées suicidaires ou de situation de crise, l'utilisateur est invité à contacter les lignes d'écoute et d'urgence présentées dans la politique de confidentialité (3114, 15, SOS Amitié, Suicide Écoute).</p>
+      </div>
+
+      <div class="section">
+        <span class="section-number">07</span>
+        <h2>Propriété intellectuelle</h2>
+        <p>L'ensemble du contenu de l'application SELEN (textes, capsules, interface, design, logo) est protégé par le droit de la propriété intellectuelle et appartient exclusivement à SELEN.</p>
+        <p>Toute reproduction, distribution ou utilisation non autorisée est strictement interdite.</p>
+      </div>
+
+      <div class="section">
+        <span class="section-number">08</span>
+        <h2>Droit applicable</h2>
+        <p>Les présentes CGU sont soumises au droit français. En cas de litige, et à défaut de résolution amiable, les tribunaux français seront seuls compétents.</p>
+        <p>Pour toute question : <a href="mailto:contact@instantselen.fr" class="contact-link">contact@instantselen.fr</a></p>
+      </div>
+
+    </div>
+
+    <footer>
+      <p>🌙 SELEN – Application de bien-être et d'introspection · Édité par FLAHAUT MARIE (CONCEPTION DIGITALE) · Mai 2026</p>
+    </footer>
+
+  </div>
+
+  <script>
+    function showTab(tab, event) {
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(tab).classList.add('active');
+      event.target.classList.add('active');
+    }
+  </script>
+</body>
+</html>
